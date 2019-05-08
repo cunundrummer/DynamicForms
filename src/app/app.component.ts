@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControlConfigService } from './form-parts/form-control-config.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'formarraydriver';
+  controls: any[];
+
+  constructor(private dynControlsConfigService: FormControlConfigService) {
+    this.controls = this.dynControlsConfigService.getDynamicControls();
+  }
 }

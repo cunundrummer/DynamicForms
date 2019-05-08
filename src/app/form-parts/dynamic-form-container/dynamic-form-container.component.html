@@ -1,0 +1,16 @@
+<div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+
+    <div *ngFor="let dynControl of dynamicControls" class="form-row">
+      <app-dynamic-form-control [dynControl]="dynControl" [formgroup]="formGroup"></app-dynamic-form-control>
+    </div>
+
+    <div class="form-row">
+      <button type="submit" [disabled]="!formGroup.valid">Save</button>
+    </div>
+  </form>
+
+  <div *ngIf="payload" class="form-row">
+    <strong>Saved the following values</strong><br>{{payload}}
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div [formGroup]="formgroup">
+  <label [attr.for]="dynControl.key">{{dynControl.label}}</label>
+
+  <div [ngSwitch]="dynControl.controlType">
+
+    <input *ngSwitchCase="'textbox'" [formControlName]="dynControl.key" [id]="dynControl.key" [type]="dynControl.type">
+
+    <div *ngSwitchCase="'radiogroup'" style="border: 1px dotted black">
+      <label *ngFor="let opt of dynControl['options']; let i=index" [attr.for]="opt.key">
+        {{opt.id}}. {{opt.value}}
+        <input [formControlName]="dynControl.key"
+               [name]="dynControl.key"
+               [id]="opt.id"
+               [type]="dynControl.type"
+               [value]="opt.key"
+               [checked]="i === 0"
+        >
+
+      </label>
+    </div>
+
+    <select [id]="dynControl.key" *ngSwitchCase="'dropdown'" [formControlName]="dynControl.key">
+      <option *ngFor="let opt of dynControl['options']" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+  </div>
+
+  <div class="errorMessage" *ngIf="!isValid">{{dynControl.label}} is required</div>
+</div>
+
